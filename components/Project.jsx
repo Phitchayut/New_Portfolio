@@ -9,15 +9,15 @@ import ProjectItems from './ProjectItems'
 
 const Project = () => {
   return (
-    <div className="w-full">
+    <div id="projects" className="w-full">
       <div className="max-w-[1240px] mx-auto px-2 py-16">
         <p className="tracking-widest uppercase text-[#5651e5]">Projects</p>
         <h2 className="py-4">What I've Built</h2>
         <div className="grid md:grid-cols-2 gap-8">
-            <ProjectItems title='Property Finder' backgroundImg={propertyImg} projectUrl='/'/>
-            <ProjectItems title='Netflix App' backgroundImg={netflixImg} projectUrl='/'/>
-            <ProjectItems title='Twitch App' backgroundImg={twitchImg} projectUrl='/'/>
-            <ProjectItems title='Crypto App' backgroundImg={cryptoImg} projectUrl='/'/>
+            <ProjectItems title='Property Finder' backgroundImg={propertyImg} projectUrl='/property'/>
+            <ProjectItems title='Netflix App' backgroundImg={netflixImg} projectUrl='/netflix'/>
+            <ProjectItems title='Twitch App' backgroundImg={twitchImg} projectUrl='/twitch'/>
+            <ProjectItems title='Crypto App' backgroundImg={cryptoImg} projectUrl='/crypto'/>
         </div>
       </div>
     </div>

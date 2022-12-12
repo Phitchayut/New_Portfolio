@@ -1,41 +1,79 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AiOutlineClose, AiOutlineMenu, AiOutlineMail } from "react-icons/ai";
 import { FaLinkedinIn, FaGithub } from "react-icons/fa";
 import { BsPersonLinesFill } from "react-icons/bs";
 
-const navList = ["Home", "About", "Skills", "Projects", "Contact"];
+const navList = [
+  {
+    name: "Home",
+    href: "/",
+  },
+  {
+    name: "About",
+    href: "#about",
+  },
+  {
+    name: "Skills",
+    href: "#skills",
+  },
+  {
+    name: "Projects",
+    href: "#projects",
+  },
+  {
+    name: "Contact",
+    href: "#contact",
+  },
+];
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
+  const [shadow, setShadow] = useState(false);
 
   const handleNav = () => {
     setNav(!nav);
   };
 
+  useEffect(() => {
+    const handleShadow = () => {
+      if (window.scrollY >= 90) {
+        setShadow(true);
+      } else {
+        setShadow(false);
+      }
+    };
+    window.addEventListener("scroll", handleShadow);
+  }, []);
+
   return (
-    <div className="fixed w-full h-20 shadow-xl z-[100]">
+    <div
+      className={
+        shadow
+          ? "fixed w-full h-20 shadow-xl z-[100] ease-in-out duration-300"
+          : "fixed w-full h-20 z-[100]"
+      }
+    >
       <div className="flex justify-between items-center w-full h-full px-8 2xl:px-16">
-        <Image
-          src="/../public/assets/navLogo.png"
-          alt="/"
-          width="100"
-          height="40"
-        />
+        <Link href="/">
+          <Image
+            src="/../public/assets/navLogo.png"
+            alt="/"
+            width="70"
+            height="40"
+          />
+        </Link>
         <div>
           <ul className="hidden md:flex">
             {navList.map((item, index) => (
-              <>
-                <Link href="/">
-                  <li
-                    key={index}
-                    className="ml-10 text-sm uppercase hover:border-b"
-                  >
-                    {item}
+              <div key={index}>
+                <Link href={`/${item.href}`}>
+                  <li className="ml-10 text-sm uppercase hover:border-b">
+                    {item.name}
                   </li>
                 </Link>
-              </>
+              </div>
             ))}
           </ul>
 
@@ -46,7 +84,9 @@ const Navbar = () => {
       </div>
 
       <div
-        className={nav ? "md:hidden fixed left-0 top-0 w-full h-screen bg-black/70" : ""}
+        className={
+          nav ? "md:hidden fixed left-0 top-0 w-full h-screen bg-black/70" : ""
+        }
       >
         <div
           className={
@@ -79,16 +119,13 @@ const Navbar = () => {
           <div>
             <ul className="py-4 flex flex-col">
               {navList.map((item, index) => (
-                <>
-                  <Link href="/">
-                    <li
-                      key={index}
-                      className="py-4 text-sm uppercase hover:border-b"
-                    >
-                      {item}
+                <div key={index}>
+                  <Link href={`/${item.href}`}>
+                    <li className="py-4 text-sm uppercase hover:border-b">
+                      {item.name}
                     </li>
                   </Link>
-                </>
+                </div>
               ))}
             </ul>
             <div className="pt-40">
